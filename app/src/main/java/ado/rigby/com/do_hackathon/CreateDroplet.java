@@ -3,6 +3,9 @@ package ado.rigby.com.do_hackathon;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+<<<<<<< HEAD
+import android.util.Log;
+=======
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -29,6 +32,7 @@ import ado.rigby.com.do_hackathon.Classes.Fedora;
 import ado.rigby.com.do_hackathon.Classes.FreeBSD;
 import ado.rigby.com.do_hackathon.Classes.FullSelection;
 import ado.rigby.com.do_hackathon.Classes.Ubuntu;
+>>>>>>> 917305a6fda073f9f9793948f46d041958d5d844
 
 public class CreateDroplet extends AppCompatActivity {
 
@@ -50,6 +54,10 @@ public class CreateDroplet extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_droplet);
+<<<<<<< HEAD
+
+        Log.v("create droplet","create droplet");
+=======
         lv= (ListView) findViewById(R.id.listView);
 
         requestQueue= Volley.newRequestQueue(this);
@@ -176,5 +184,6 @@ public class CreateDroplet extends AppCompatActivity {
             }
         });
 
+>>>>>>> 917305a6fda073f9f9793948f46d041958d5d844
     }
 }
