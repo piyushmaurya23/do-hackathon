@@ -43,6 +43,14 @@
                 android:id="@+id/textView6"
                 android:layout_centerHorizontal="true" />
 
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@+id/textView5"
+                android:layout_marginTop="20dp">
+
+            </Spinner>
+
 
 
 
@@ -51,21 +59,14 @@
 
         </RelativeLayout>
 
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"></Spinner>
-
-
-
-
-
     </ScrollView>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Create Record"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true"
+        android:id="@+id/button" />
 
 
 </RelativeLayout>

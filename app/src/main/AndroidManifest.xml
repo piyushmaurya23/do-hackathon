@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ado.rigby.com.do_hackathon">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,9 +21,17 @@
             </intent-filter>
         </activity>
         <activity android:name=".CreateDroplet" />
+<<<<<<< HEAD
+        <activity android:name=".DisplayDroplets"></activity>
+=======
         <activity android:name=".Select" />
+<<<<<<< HEAD
         <activity android:name=".SizeSel" />
         <activity android:name=".Networking"></activity>
+=======
+        <activity android:name=".SizeSel"></activity>
+>>>>>>> 917305a6fda073f9f9793948f46d041958d5d844
+>>>>>>> e907398fa51a8e43df36a770d7d463857a380d78
     </application>
 
 </manifest>

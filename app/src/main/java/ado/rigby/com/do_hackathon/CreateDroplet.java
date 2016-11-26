@@ -3,6 +3,9 @@ package ado.rigby.com.do_hackathon;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import android.util.Log;
+
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -50,6 +53,10 @@ public class CreateDroplet extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_droplet);
+
+
+        Log.v("create droplet","create droplet");
+
         lv= (ListView) findViewById(R.id.listView);
 
         requestQueue= Volley.newRequestQueue(this);

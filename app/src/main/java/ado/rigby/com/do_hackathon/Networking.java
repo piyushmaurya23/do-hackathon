@@ -3,8 +3,12 @@ package ado.rigby.com.do_hackathon;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Display;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.RequestQueue;
@@ -22,40 +26,53 @@ public class Networking extends AppCompatActivity {
 
     String url="https://api.digitalocean.com/v2/domains";
     EditText ed;
+    Button b;
     ListView listView;
     RequestQueue requestQueue;
+    Spinner sp;
+    String []ar=new String[DisplayDroplets.droplet_list.size()];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_networking);
         listView= (ListView) findViewById(R.id.listView3);
+        for(int x=0;x<DisplayDroplets.droplet_list.size();x++)
+            ar[x]=DisplayDroplets.droplet_list.get(x).getDroplet_name();
+
+
+        b= (Button) findViewById(R.id.button);
         ed= (EditText) findViewById(R.id.editText);
         requestQueue= Volley.newRequestQueue(this);
-
-        JsonObjectRequest jsonObjectRequest=new JsonObjectRequest(url, new JSONObject(), new Response.Listener<JSONObject>() {
+        ArrayAdapter ad=new ArrayAdapter(this, android.R.layout.simple_spinner_item,ar);
+        sp.setAdapter(ad);
+        b.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(JSONObject jsonObject) {
+            public void onClick(View v) {
+                JsonObjectRequest jsonObjectRequest=new JsonObjectRequest(url, new JSONObject(), new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject jsonObject) {
 
+                    }
+                },new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+
+                    }
+                }){
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String,String> mp=new HashMap<>();
+                        mp.put("name", DisplayDroplets.droplet_list.get(sp.getSelectedItemPosition()).getDroplet_name());
+                        mp.put("ip",DisplayDroplets.droplet_list.get(sp.getSelectedItemPosition()).getIp_address());
+                        return mp;
+                    }
+                };
+
+                requestQueue.add(jsonObjectRequest);
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
+        });
 
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> mp=new HashMap<>();
-
-                    mp.put("name", DisplayDroplets.droplets_list.get(0));
-                mp.put("")
-
-                return super.getParams();
-            }
-        };
-
-        requestQueue.add(jsonObjectRequest);
 
 
 
