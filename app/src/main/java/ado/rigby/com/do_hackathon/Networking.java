@@ -49,34 +49,32 @@ public class Networking extends AppCompatActivity {
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                JsonObjectRequest jsonObjectRequest=new JsonObjectRequest(url, new JSONObject(), new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject jsonObject) {
+                if(ed.getText().toString()!=null) {
+                    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url, new JSONObject(), new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject jsonObject) {
 
-                    }
-                },new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError volleyError) {
 
-                    }
-                }){
-                    @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        Map<String,String> mp=new HashMap<>();
-                        mp.put("name", DisplayDroplets.droplet_list.get(sp.getSelectedItemPosition()).getDroplet_name());
-                        mp.put("ip",DisplayDroplets.droplet_list.get(sp.getSelectedItemPosition()).getIp_address());
-                        return mp;
-                    }
-                };
+                        }
+                    }) {
+                        @Override
+                        protected Map<String, String> getParams() throws AuthFailureError {
+                            Map<String, String> mp = new HashMap<>();
+                            mp.put("name", ed.getText().toString());
+                            mp.put("ip_address", DisplayDroplets.droplet_list.get(sp.getSelectedItemPosition()).getIp_address());
+                            return mp;
+                        }
+                    };
 
-                requestQueue.add(jsonObjectRequest);
+                    requestQueue.add(jsonObjectRequest);
+                }
+                else
+                    ed.setError("Please enter Domain here");
             }
         });
-
-
-
-
-
-
     }
 }
