@@ -27,8 +27,7 @@ public class SizeSel extends AppCompatActivity {
     RequestQueue requestQueue;
     String url="https://api.digitalocean.com/v2/sizes";
     static ArrayList<String> price=new ArrayList<>();
-    static ArrayList<String> disk=new ArrayList<>();
-    ArrayList<String> al=new ArrayList<>();
+    static ArrayList<String> slug=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,9 +44,9 @@ public class SizeSel extends AppCompatActivity {
                     {
                         JSONObject js=jsonArray.getJSONObject(x);
                         price.add(js.getString("price_monthly"));
-                        disk.add(js.getString("disk"));
-                        al.add(js.getString("slug"));
-                        ArrayAdapter ad=new ArrayAdapter(getApplicationContext(),android.R.layout.simple_list_item_1,al);
+
+                        slug.add(js.getString("slug"));
+                        ArrayAdapter ad=new ArrayAdapter(getApplicationContext(),android.R.layout.simple_list_item_1,slug);
                         lv.setAdapter(ad);
                     }
                 } catch (JSONException e) {
@@ -73,7 +72,7 @@ public class SizeSel extends AppCompatActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                CreateDroplet.fs.setSize(al.get(position));
+                //CreateDroplet.fs.setSize(al.get(position));
             }
         });
 

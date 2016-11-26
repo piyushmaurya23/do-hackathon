@@ -200,7 +200,7 @@ public class Main2Activity extends AppCompatActivity {
                         break;
                 }
 
-                Intent i =new Intent(Main2Activity.this,SizeSel.class);
+                Intent i =new Intent(Main2Activity.this,SizeSel2.class);
                 startActivity(i);
             }
         });
