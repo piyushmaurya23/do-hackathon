@@ -11,9 +11,16 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONObject;
+
 public class MainActivity extends AppCompatActivity {
     EditText token;
     Button token_btn;
+    String url="https://cloud.digitalocean.com/v1/oauth/authorize";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +33,12 @@ public class MainActivity extends AppCompatActivity {
         token_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                JsonObjectRequest request=new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject jsonObject) {
+
+                    }
+                })
 
             }
         });
