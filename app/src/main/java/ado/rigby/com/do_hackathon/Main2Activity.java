@@ -1,30 +1,32 @@
 package ado.rigby.com.do_hackathon;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
-import android.util.Log;
-
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
 import ado.rigby.com.do_hackathon.Classes.CentOS;
 import ado.rigby.com.do_hackathon.Classes.CoreOS;
 import ado.rigby.com.do_hackathon.Classes.Debian;
@@ -33,10 +35,9 @@ import ado.rigby.com.do_hackathon.Classes.FreeBSD;
 import ado.rigby.com.do_hackathon.Classes.FullSelection;
 import ado.rigby.com.do_hackathon.Classes.Ubuntu;
 
-public class CreateDroplet extends AppCompatActivity {
-
-    String url="https://api.digitalocean.com/v2/images?page=1&per_page=28&type=distribution";
+public class Main2Activity extends AppCompatActivity {
     RequestQueue requestQueue;
+    String url="https://api.digitalocean.com/v2/images?page=1&per_page=28&type=distribution";
     static ArrayList<Ubuntu> ub=new ArrayList<>();
     static ArrayList<CentOS> co=new ArrayList<>();
     static ArrayList<CoreOS> cor=new ArrayList<>();
@@ -44,26 +45,30 @@ public class CreateDroplet extends AppCompatActivity {
     static ArrayList<Fedora> fd=new ArrayList<>();
     static ArrayList<FreeBSD> fb=new ArrayList<>();
     ListView lv;
-    String slug;
+    Spinner name,dis;
+    String []names;
     static FullSelection fs=new FullSelection();
+    Button b,b2;
     String ar[]={"Ubuntu","CentOS","CoreOS","Debian","Fedora","FreeBSD"};
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_droplet);
+        setContentView(R.layout.activity_main2);
 
-
-        Log.v("create droplet","create droplet");
-
-        lv= (ListView) findViewById(R.id.listView);
+        name= (Spinner) findViewById(R.id.spinner);
+        dis= (Spinner) findViewById(R.id.spinner);
+        b2= (Button) findViewById(R.id.button3);
 
         requestQueue= Volley.newRequestQueue(this);
-
+        lv= (ListView) findViewById(R.id.listView);
+        final ProgressDialog pd=new ProgressDialog(this);
+        pd.setMessage("Please Wait");
+        pd.show();
+        b= (Button) findViewById(R.id.button);
         JsonObjectRequest jsonObjectRequest=new JsonObjectRequest(Request.Method.GET, url, new JSONObject(), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
+                pd.dismiss();
                 try {
                     JSONArray jr=jsonObject.getJSONArray("images");
                     for(int x=0;x<jr.length();x++)
@@ -123,12 +128,6 @@ public class CreateDroplet extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"Error",Toast.LENGTH_LONG).show();
             }
         }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> mp=new HashMap<String,String>();
-
-                return super.getParams();
-            }
 
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -138,50 +137,74 @@ public class CreateDroplet extends AppCompatActivity {
             }
         };
         requestQueue.add(jsonObjectRequest);
-        ArrayAdapter ad=new ArrayAdapter(this,android.R.layout.activity_list_item,ar);
-        lv.setAdapter(ad);
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        ArrayAdapter adapter=new ArrayAdapter(this,android.R.layout.simple_spinner_item,ar);
+        name.setAdapter(adapter);
+        names=new String[ub.size()];
+        for(int x=0;x<ub.size();x++)
+            names[x]=ub.get(x).getName();
+        ArrayAdapter ad2=new ArrayAdapter(this,android.R.layout.simple_spinner_item,names);
+        dis.setAdapter(ad2);
 
-
+        b.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onClick(View v) {
 
-
-                switch (position) {
-                    case 0:
-                        Intent i = new Intent(CreateDroplet.this, Select.class);
-                        i.putExtra("key", "Ubuntu");
-                        startActivity(i);
-
+                switch(name.getSelectedItemPosition())
+                {
+                    case 0:names=new String[ub.size()];
+                        for(int x=0;x<ub.size();x++)
+                            names[x]=ub.get(x).getName();
                         break;
-                    case 1:
-                        Intent i2 = new Intent(CreateDroplet.this, Select.class);
-                        i2.putExtra("key", "CentOS");
-                        startActivity(i2);
+                    case 1:names=new String[co.size()];
+                        for(int x=0;x<co.size();x++)
+                            names[x]=co.get(x).getName();
                         break;
-                    case 2:
-                        Intent i3 = new Intent(CreateDroplet.this, Select.class);
-                        i3.putExtra("key", "CoreOS");
-                        startActivity(i3);
+                    case 2:names=new String[cor.size()];
+                        for(int x=0;x<cor.size();x++)
+                            names[x]=cor.get(x).getName();
                         break;
-                    case 3:
-                        Intent i4 = new Intent(CreateDroplet.this, Select.class);
-                        i4.putExtra("key", "Debian");
-                        startActivity(i4);
+                    case 3:names=new String[deb.size()];
+                        for(int x=0;x<deb.size();x++)
+                            names[x]=deb.get(x).getName();
                         break;
-                    case 4:
-                        Intent i5 = new Intent(CreateDroplet.this, Select.class);
-                        i5.putExtra("key", "Fedora");
-                        startActivity(i5);
+                    case 4:names=new String[fd.size()];
+                        for(int x=0;x<fd.size();x++)
+                            names[x]=fd.get(x).getName();
                         break;
-                    case 5:
-                        Intent i6 = new Intent(CreateDroplet.this, Select.class);
-                        i6.putExtra("key", "FreeBSD");
-                        startActivity(i6);
+                    case 5:names=new String[fb.size()];
+                        for(int x=0;x<fb.size();x++)
+                            names[x]=fb.get(x).getName();
                         break;
-
                 }
             }
         });
+
+        b2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int posn=name.getSelectedItemPosition();
+                int posd=dis.getSelectedItemPosition();
+                switch(posn)
+                {
+                    case 0:fs.setSlug(ub.get(posd).getSlug());
+                        break;
+                    case 1:fs.setSlug(co.get(posd).getSlug());
+                        break;
+                    case 2:fs.setSlug(cor.get(posd).getSlug());
+                        break;
+                    case 3:fs.setSlug(fd.get(posd).getSlug());
+                        break;
+                    case 4:fs.setSlug(fb.get(posd).getSlug());
+                        break;
+                    case 5:fs.setSlug(deb.get(posd).getSlug());
+                        break;
+                }
+
+                Intent i =new Intent(Main2Activity.this,SizeSel.class);
+                startActivity(i);
+            }
+        });
+
+
     }
 }

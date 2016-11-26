@@ -49,7 +49,7 @@ public class DisplayDroplets extends AppCompatActivity {
                     JSONArray arr=jsonObject.getJSONArray("droplets");
                     Log.v("array",arr.toString());
                     for(int i=0;i<arr.length();i++){
-                   JSONObject jobj=arr.getJSONObject(i);
+                        JSONObject jobj=arr.getJSONObject(i);
                         String name=""+jobj.getString("name");
                         String memory=" "+jobj.getString("memory");
                         String disk=" " +jobj.getString("disk");
@@ -86,7 +86,6 @@ public class DisplayDroplets extends AppCompatActivity {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String,String> mp=new HashMap<String, String>();
-                // mp.put("Content-Type", "application/json");
                 mp.put("Authorization","Bearer " + token);
                 return mp;
             }
