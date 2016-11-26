@@ -26,7 +26,8 @@
         <activity android:name=".SizeSel" />
         <activity android:name=".Networking" />
         <activity android:name=".Main2Activity" />
-        <activity android:name=".SizeSel2"></activity>
+        <activity android:name=".SizeSel2" />
+        <activity android:name=".End"></activity>
     </application>
 
 </manifest>

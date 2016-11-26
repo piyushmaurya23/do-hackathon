@@ -31,7 +31,7 @@ public class ListAdapter extends ArrayAdapter {
         TextView tv3= (TextView) vv.findViewById(R.id.textView4);
 
         tv1.setText(al.get(position));
-        tv2.setText("Disk Storage:- " +SizeSel.disk.get(position)+"GB");
+        //tv2.setText("Disk Storage:- " +SizeSel.disk.get(position)+"GB");
         tv3.setText("Price:- "+SizeSel.price.get(position)+"$");
 
 
