@@ -145,6 +145,7 @@ public class CreateDroplet extends AppCompatActivity {
                         Intent i = new Intent(CreateDroplet.this, Select.class);
                         i.putExtra("key", "Ubuntu");
                         startActivity(i);
+
                         break;
                     case 1:
                         Intent i2 = new Intent(CreateDroplet.this, Select.class);
@@ -175,6 +176,7 @@ public class CreateDroplet extends AppCompatActivity {
                 }
             }
         });
+
 
     }
 }

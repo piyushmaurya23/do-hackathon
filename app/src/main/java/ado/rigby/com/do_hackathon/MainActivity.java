@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     EditText token_txt;
     Button token_btn;
     String url="https://api.digitalocean.com/v2/droplets";
-    String token="478d10b07905b60e04e949aa9e35ab7bc19f1b4fbe4d398aaf16d51d7986da73";
+    static String token="478d10b07905b60e04e949aa9e35ab7bc19f1b4fbe4d398aaf16d51d7986da73";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -20,7 +20,8 @@
         </activity>
         <activity android:name=".CreateDroplet" />
         <activity android:name=".Select" />
-        <activity android:name=".SizeSel"></activity>
+        <activity android:name=".SizeSel" />
+        <activity android:name=".Networking"></activity>
     </application>
 
 </manifest>
