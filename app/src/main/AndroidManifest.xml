@@ -18,7 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CreateDroplet"></activity>
+        <activity android:name=".CreateDroplet" />
+        <activity android:name=".Select" />
+        <activity android:name=".SizeSel"></activity>
     </application>
 
 </manifest>

@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                   @Override
                   public Map<String, String> getHeaders() throws AuthFailureError {
                       Map<String,String> mp=new HashMap<String, String>();
-                      mp.put("Authorization: Bearer ",token);
+                      mp.put("Authorization","Bearer "+token);
                       return mp;
                   }
 
